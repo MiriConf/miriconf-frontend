@@ -1,0 +1,21 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miriconf-frontend
+  labels:
+    app: miriconf-frontend
+spec:
+  selector:
+    matchLabels:
+      app: miriconf-frontend
+  template:
+    metadata:
+      labels:
+        app: miriconf-frontend
+    spec:
+      containers:
+      - name: miriconf-frontend
+        image: miriconf-frontend
+      ports:
+        - containerPort: 8080
