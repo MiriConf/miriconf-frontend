@@ -5,7 +5,7 @@ The miriconf NodeJS frontend.
 
 ## Running a local dev environment with Tilt on Windows
 
-Clone this repository as well as the Miriconf backend repository, make sure they are both in the same folder like below:
+Clone this repository as well as the [MiriConf Backend](https://github.com/MiriConf/miriconf-backend) repository, make sure they are both in the same folder like below:
 
 ```
 Documents
