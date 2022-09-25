@@ -1,4 +1,6 @@
-FROM node:18.9-alpine3.15
+ARG TARGETARCH
+
+FROM --platform=$TARGETPLATFORM node:18.9-alpine3.15
 
 WORKDIR /frontend
 
