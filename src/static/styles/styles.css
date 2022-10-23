@@ -1,0 +1,14 @@
+/*This is for class main,# is for ID(unique)*/
+.main{
+    margin: auto;
+    width: 60%;
+    border: 1px solid #ff0d00;
+    padding: 10px;
+    top: 50%;
+    transform: translate(0, 30%);
+}
+/*This is for body tag*/
+body{
+    position: relative;
+    background-image: url("https://s2.loli.net/2022/10/14/aF8Kb6H9edhumi1.png");
+}
