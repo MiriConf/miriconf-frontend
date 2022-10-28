@@ -1,14 +1,16 @@
-const http = require('http');
- 
-const host = '0.0.0.0';
-const port = 8080;
- 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('TESTING');
+const express = require("express");
+const morg = require("morgan");
+const path = require("path");
+var app = express();
+
+app.use(morg('test'));
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'pages')));
+
+app.get('*', function(req, res) {
+   res.send('error');
 });
- 
-server.listen(port, host, () => {
-   console.log('running at http://%s:%s',host,port );
-});
+
+app.listen(8000);
+console.log("web server started on port 8000");
