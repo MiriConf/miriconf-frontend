@@ -2,6 +2,7 @@ const express = require("express");
 const morg = require("morgan");
 const path = require("path");
 var app = express();
+const port = 8080;
 
 app.use(morg('test'));
 
@@ -12,5 +13,5 @@ app.get('/', function(req, res) {
    res.sendFile('teams.html',{ root: 'pages'});
 });
 
-app.listen(8080);
-console.log("web server started on port 8080");
+app.listen(port);
+console.log('web server started on port '+ port);
