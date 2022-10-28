@@ -8,8 +8,8 @@ app.use(morg('test'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'pages')));
 
-app.get('*', function(req, res) {
-   res.send('error');
+app.get('/', function(req, res) {
+   res.sendFile('teams.html',{ root: 'pages'});
 });
 
 app.listen(8080);
