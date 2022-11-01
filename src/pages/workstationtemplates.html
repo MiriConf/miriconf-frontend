@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<!-- nav bar -->
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="login.html">MIRICONF</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="teams.html">TEAMS</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="workstationtemplates.html">WORKSTATION TEMPLATES</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">ADMIN</a>
+          </li>
+      </ul>
+    </div>
+  </nav>
+<!-- Team List section -->
+
+    <div class="container-fluid h-custom teams">
+     <div class="teamlistleft">
+      <ul class="list-group">
+        <li class="list-group-item active" aria-current="true">WORKSTATION TEMPLATES<button type="button" class="btn btn-primary">+</li>
+        <li class="list-group-item" id="temp1">TEMPLATE 1</li>  <!-- Delete the static text once pulling script done -->
+        <li class="list-group-item" id="temp2">TEMPLATE 2</li>
+        <li class="list-group-item" id="temp3">TEMPLATE 3</li>
+        <li class="list-group-item" id="'temp4">TEMPLATE 4</li>
+      </ul>
+     </div>
+     <div class="teamlistright">
+      <ul class="list-group">
+        <li class="list-group-item active" aria-current="true">TEMPLATE EDITOR<button type="button" class="btn btn-primary">+</li>
+        <li class="list-group-item">
+          <button type="button" class="btn btn-danger">x</button>
+          <button type="button" class="btn btn-primary">o</button>
+          <div class="dropdown" style="float:right">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">1</a>
+              <a class="dropdown-item" href="#">2</a>
+              <a class="dropdown-item" href="#">3</a>
+            </div>
+          </div>
+          TEMPLATE 1</li>
+          <li class="list-group-item">
+            <button type="button" class="btn btn-danger">x</button>
+            <button type="button" class="btn btn-primary">o</button>
+            <div class="dropdown" style="float:right">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">1</a>
+                <a class="dropdown-item" href="#">2</a>
+                <a class="dropdown-item" href="#">3</a>
+              </div>
+            </div>
+            TEMPLATE 2</li>
+            <li class="list-group-item">
+              <button type="button" class="btn btn-danger">x</button>
+              <button type="button" class="btn btn-primary">o</button>
+              <div class="dropdown"style="float:right">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">1</a>
+                  <a class="dropdown-item" href="#">2</a>
+                  <a class="dropdown-item" href="#">3</a>
+                </div>
+              </div>
+              TEMPLATE 3</li>
+      </ul>
+     </div>
+     <div class="teamlistbottom">
+      <ul class="list-group">
+        <li class="list-group-item active" aria-current="true">APP EDIT</li>
+        <li class="list-group-item">Versions
+          <div class="dropdown"style="float:right">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">1</a>
+              <a class="dropdown-item" href="#">2</a>
+              <a class="dropdown-item" href="#">3</a>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">Extensions
+          <div class="dropdown"style="float:right">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">1</a>
+              <a class="dropdown-item" href="#">2</a>
+              <a class="dropdown-item" href="#">3</a>
+            </div>
+          </div>
+        </li>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </ul>
+     </div>
+    </div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="../static/scripts/index.js"></script>
+</body>
+</html>
