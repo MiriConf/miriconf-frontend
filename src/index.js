@@ -5,11 +5,10 @@ var app = express();
 
 app.use(morg('test'));
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'pages')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.get('*', function(req, res) {
-   res.send('error');
+   res.send('ope');
 });
 
 app.listen(8080);
