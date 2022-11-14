@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <script src="js/pageHandle.js"></script>
+  </head>
+  <body onload="teamInfo()">
+    <div id="teamCreation">
+      <h2>Create a new Team</h2>
+      <input type="text" id="tname" name="tname" /><br /><br />
+      <input type="text" id="tdepartment" name="tdepartment" /><br /><br />
+      <button type="submit" onclick="createTeam()">create</button>
+    </div>
+    <div id="teamDeletion">
+      <h2>Remove a Team</h2>
+      <input type="text" id="tdel" name="tdel" /><br /><br />
+      <button onclick="deleteTeam()">delete</button>
+    </div>
+    <div id="currentTeams">
+      <h2>Current Teams</h2>
+      <div id="teamList"></div>
+    </div>
+  </body>
+</html>
