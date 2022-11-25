@@ -7,6 +7,7 @@ function loginAuth() {
     headers: {'Content-Type': 'application/json'}, 
     body: authPost
   }).then(res => res.text()) 
+  .then((res) => res.replace(/\"/g, ""))
   .then ((res) => {
     console.log(res);
     document.cookie = "authKey="+res;
