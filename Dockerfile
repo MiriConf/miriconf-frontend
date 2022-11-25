@@ -6,6 +6,8 @@ WORKDIR /frontend
 
 ADD src/ .
 
-RUN yarn install
+RUN npm install express morgan path 
+
+EXPOSE 8080
 
 ENTRYPOINT [ "node", "/frontend/index.js" ]
