@@ -9,7 +9,12 @@ function loginAuth() {
   }).then(res => res.text()) 
   .then((res) => res.replace(/\"/g, ""))
   .then ((res) => {
-    console.log(res);
-    document.cookie = "authKey="+res;
+    if (res === "{error:password is incorrect}") {
+      alert("Invalid password!");
+    } else {
+      console.log(res);
+      document.cookie = "authKey="+res;
+      location.replace("http://localhost:8080/teams.html")
+    }
   });
   };
