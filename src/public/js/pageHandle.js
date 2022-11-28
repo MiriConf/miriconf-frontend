@@ -134,19 +134,50 @@ function createTeamAlert() {
   //setTimeout(pageRefresh, 2000);
   //function pageRefresh() {
   //  window.location.reload();
- // }
+  // }
 }
 
+async function pullApps() {
+  if (localStorage.getItem("applications") === null) {
+    let auth = getCookie();
+    let appResponse = await fetch("http://localhost:8081/api/v1/apps/list", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${auth}`,
+      },
+    });
+    let data = await appResponse.json();
+    localStorage.setItem("applications", JSON.stringify(data));
+  } else {
+    console.log("Local data found...");
+  }
+}
+function searchApps() {
+  let asearch = document.getElementById("aSearch").value;
+  importApps = localStorage.getItem("applications");
+  parseApps = JSON.parse(importApps);
+  for (var i = 0; i < parseApps.length; i++) {
+    if (parseApps[i]["name"] === asearch) {
+      resultName = parseApps[i]["name"];
+      resultDesc = parseApps[i]["description"];
+      document.getElementById("appName").innerHTML = `Name: ${resultName}`;
+      document.getElementById(
+        "appDesc"
+      ).innerHTML = `Description: ${resultDesc}`;
+      console.log(i);
+    } else {
+    }
+  }
+}
 
-function getCookie() 
-    {
-      let name = "authKey";
-      var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-      if (match) {
-        console.log(match[2]);
-        return match[2];
-      }
-      else{
-           console.log('--something went wrong---');
-      }
-   }
+function getCookie() {
+  let name = "authKey";
+  var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  if (match) {
+    console.log(match[2]);
+    return match[2];
+  } else {
+    console.log("--something went wrong---");
+  }
+}

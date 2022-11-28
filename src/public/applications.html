@@ -1,8 +1,15 @@
+<!DOCTYPE html>
 <html>
   <head>
     <script src="js/pageHandle.js"></script>
   </head>
-  <body onload=""">
-  
+  <body onload="pullApps()">
+    <div id="appSearch">
+        <h2>App search</h2>
+        <input type="text" id="aSearch" name="aSearch" /><br /><br />
+        <button onclick="searchApps()">search</button>
+        <p id="appName"></p>
+        <p id="appDesc"></p>
+      </div>
   </body>
 </html>
