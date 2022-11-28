@@ -95,7 +95,7 @@ function createTeamAlert() {
   let sPat = prompt("Please enter your source PAT:", "");
   let tApps = "1111";
   let auth = getCookie();
-  teamDatPost = `{"name": "${teamName}", "department": "${teamDep}", "source_repo": "${sRepo}", "source_pat": "${sPat}, "apps": "${tApps}"}`;
+  teamDatPost = `{"name": "${teamName}", "department": "${teamDep}", "source_repo": "${sRepo}", "source_pat": "${sPat}", "apps": "${tApps}"}`;
   fetch("http://localhost:8081/api/v1/teams", {
     method: "POST",
     headers: {
