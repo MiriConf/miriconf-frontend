@@ -12,7 +12,6 @@ function loginAuth() {
     if (res === "{error:password is incorrect}") {
       alert("Invalid password!");
     } else {
-      console.log(res);
       document.cookie = "authKey="+res;
       location.replace("http://localhost:8080/teams.html")
     }
