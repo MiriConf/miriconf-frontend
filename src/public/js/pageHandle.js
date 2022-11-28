@@ -1,6 +1,6 @@
 /*Function for drop down with team select*/
 function teamSelector() {
-  let auth = document.cookie.split("=")[1];
+  let auth = getCookie();
   fetch("http://localhost:8081/api/v1/teams/list", {
     method: "GET",
     headers: {
@@ -39,7 +39,7 @@ function teamSelector() {
 }
 /*Function for creating a table of all teams available*/
 function teamInfo() {
-  let auth = document.cookie.split("=")[1];
+  let auth = getCookie();
   fetch("http://localhost:8081/api/v1/teams/list", {
     method: "GET",
     headers: {
@@ -49,7 +49,6 @@ function teamInfo() {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
       teamTable = [];
       var headers = ["Name", "Department", "Created", "Source Repo"];
       var table = document.createElement("TABLE"); //makes a table element for the page
@@ -96,10 +95,9 @@ function teamInfo() {
 /*Function for deleting a team*/
 function deleteTeam() {
   var teamDel = document.getElementById("tdel").value;
-  console.log(teamDel);
   let userName = "testuser";
   let passWord = "testing";
-  let auth = document.cookie.split("=")[1];
+  let auth = getCookie();
   authPost = `{"username": "${userName}", "password": "${passWord}"}`;
   fetch(`http://localhost:8081/api/v1/teams/${teamDel}`, {
     method: "DELETE",
@@ -120,12 +118,9 @@ function createTeamAlert() {
   let teamDep = prompt("Please enter your department name:", "");
   let sRepo = prompt("Please enter your source repo:", "");
   let sPat = prompt("Please enter your source PAT:", "");
-  let tApps = prompt("Please enter your Application IDs:", "");
-  let auth = document.cookie.split("=")[1];
-  console.log(auth);
-  console.log(teamName, teamDep, sRepo, sPat);
-  teamDatPost = `{"name": "${teamName}", "department": "${teamDep}", "source_repo": "${sRepo}", "source_pat": "${sPat}", "apps": "${tApps}"}`;
-
+  let tApps = "1111";
+  let auth = getCookie();
+  teamDatPost = `{"name": "${teamName}", "department": "${teamDep}", "source_repo": "${sRepo}", "source_pat": "${sPat}, "apps": "${tApps}"}`;
   fetch("http://localhost:8081/api/v1/teams", {
     method: "POST",
     headers: {
@@ -137,5 +132,52 @@ function createTeamAlert() {
   setTimeout(pageRefresh, 2000);
   function pageRefresh() {
     window.location.reload();
+   }
+}
+
+async function pullApps() {
+  if (localStorage.getItem("applications") === null) {
+    let auth = getCookie();
+    let appResponse = await fetch("http://localhost:8081/api/v1/apps/list", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${auth}`,
+      },
+    });
+    let data = await appResponse.json();
+    localStorage.setItem("applications", JSON.stringify(data));
+  } else {
+    console.log("Local data found...");
+  }
+}
+function searchApps() {
+  let asearch = document.getElementById("aSearch").value;
+  importApps = localStorage.getItem("applications");
+  parseApps = JSON.parse(importApps);
+  for (var i = 0; i < parseApps.length; i++) {
+    if (parseApps[i]["name"] === asearch) {
+      resultName = parseApps[i]["name"];
+      resultDesc = parseApps[i]["description"];
+      resultId = parseApps[i]["_id"]
+      document.getElementById("appName").innerHTML = `Name: ${resultName}`;
+      document.getElementById("appDesc").innerHTML = `Description: ${resultDesc}`;
+      document.getElementById("appId").innerHTML = `App ID: ${resultId}`;
+      break;
+    } else {
+      document.getElementById("appName").innerHTML = `App not found!`;
+      document.getElementById("appDesc").innerHTML = ``;
+      document.getElementById("appId").innerHTML = ``;
+    }
+  }
+}
+
+function getCookie() {
+  let name = "authKey";
+  var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  if (match) {
+    return match[2];
+  } else {
+    console.log("--something went wrong---");
   }
 }
