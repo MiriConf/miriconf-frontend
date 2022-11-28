@@ -67,31 +67,6 @@ function teamInfo() {
       document.getElementById("teamList").append(table);
     });
 }
-
-/*Function for creating a new team*/
-/*function createTeam() {
-  var teamName = document.getElementById("tname").value;
-  var teamDep = document.getElementById("tdepartment").value;
-  var sRepo = document.getElementById("srepo").value;
-  var sPat = document.getElementById("spat").value;
-  var tApps = document.getElementById("tapps").value;
-  console.log(teamName, teamDep);
-  let auth = document.cookie.split("=")[1];
-  teamDatPost = `{"name": "${teamName}", "department": "${teamDep}", "source_repo": "${sRepo}", "source_pat": "${sPat}", "apps": "${tApps}"}`;
-      fetch("http://localhost:8081/api/v1/teams", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${auth}`,
-        },
-        body: teamDatPost,
-      });
-  setTimeout(pageRefresh, 1000);
-  function pageRefresh() {
-    window.location.reload();
-  }
-}*/
-
 /*Function for deleting a team*/
 function deleteTeam() {
   var teamDel = document.getElementById("tdel").value;
@@ -111,7 +86,7 @@ function deleteTeam() {
     window.location.reload();
   }
 }
-
+/*function for creating a team via Alert*/
 function createTeamAlert() {
   alert("Welcome to the create a team GUI, click Ok to continue.");
   let teamName = prompt("Please enter your team name:", "");
@@ -134,7 +109,7 @@ function createTeamAlert() {
     window.location.reload();
    }
 }
-
+/*Function to pull applications from backend and store them in local storage*/
 async function pullApps() {
   if (localStorage.getItem("applications") === null) {
     let auth = getCookie();
@@ -151,6 +126,7 @@ async function pullApps() {
     console.log("Local data found...");
   }
 }
+/*Function to search localstorage for available applications*/
 function searchApps() {
   let asearch = document.getElementById("aSearch").value;
   importApps = localStorage.getItem("applications");
@@ -171,7 +147,7 @@ function searchApps() {
     }
   }
 }
-
+/*Function to check cookie value*/
 function getCookie() {
   let name = "authKey";
   var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
