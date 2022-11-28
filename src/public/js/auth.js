@@ -13,7 +13,7 @@ function loginAuth() {
       alert("Invalid password!");
     } else {
       document.cookie = "authKey="+res;
-      location.replace("http://localhost:8080/teams.html")
+      location.replace("http://localhost:8080/team")
     }
   });
   };
