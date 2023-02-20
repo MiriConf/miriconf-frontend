@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Link from 'next/link'
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -9,37 +10,37 @@ import PersonIcon from '@mui/icons-material/Person';
 
 export const mainListItems = (
   <React.Fragment>
-    <ListItemButton>
+    <Link href="/"><ListItemButton>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
-    </ListItemButton>
+    </ListItemButton></Link>
 
-    <ListItemButton>
+    <Link href="/users"><ListItemButton>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Users" />
-    </ListItemButton>
+    </ListItemButton></Link>
 
-    <ListItemButton>
+    <Link href="/systems"><ListItemButton>
       <ListItemIcon>
         <LaptopIcon />
       </ListItemIcon>
       <ListItemText primary="Systems" />
-    </ListItemButton>
+    </ListItemButton></Link>
 
   </React.Fragment>
 );
 
 export const secondaryListItems = (
   <React.Fragment>
-    <ListItemButton>
+    <Link href="/profile"><ListItemButton>
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
       <ListItemText primary="Profile" />
-    </ListItemButton>
+    </ListItemButton></Link>
   </React.Fragment>
 );
