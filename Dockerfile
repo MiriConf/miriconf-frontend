@@ -1,13 +1,17 @@
 ARG TARGETARCH
 
-FROM --platform=$TARGETPLATFORM node:18.9-alpine3.15
+FROM --platform=$TARGETPLATFORM alpine:3.17.1
 
 WORKDIR /frontend
 
-ADD src/ .
+RUN apk add yarn
 
-RUN npm install express morgan path 
+RUN yarn add next
 
-EXPOSE 8080
+ADD . .
 
-ENTRYPOINT [ "node", "/frontend/index.js" ]
+RUN yarn install
+
+EXPOSE 3000
+
+ENTRYPOINT [ "yarn", "next", "dev" ]
