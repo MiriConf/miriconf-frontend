@@ -4,19 +4,16 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Title from './Title';
+import Title from './common/Title';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault();
-}
 
 // Read in cookie data 
 function getCookie() {
   const myCookie = Cookies.get("authKey")
   return myCookie
 }
+
 function DatabaseData() {
   const [data, setData] = useState([]);
   const cookie = getCookie();

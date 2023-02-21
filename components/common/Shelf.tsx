@@ -7,6 +7,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import LaptopIcon from '@mui/icons-material/Laptop';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonIcon from '@mui/icons-material/Person';
+import GroupIcon from '@mui/icons-material/Groups';
 
 export const mainListItems = (
   <React.Fragment>
@@ -17,11 +18,11 @@ export const mainListItems = (
       <ListItemText primary="Dashboard" />
     </ListItemButton></Link>
 
-    <Link href="/users"><ListItemButton>
+    <Link href="/teams"><ListItemButton>
       <ListItemIcon>
-        <PeopleIcon />
+        <GroupIcon />
       </ListItemIcon>
-      <ListItemText primary="Users" />
+      <ListItemText primary="Teams" />
     </ListItemButton></Link>
 
     <Link href="/systems"><ListItemButton>
@@ -29,6 +30,13 @@ export const mainListItems = (
         <LaptopIcon />
       </ListItemIcon>
       <ListItemText primary="Systems" />
+    </ListItemButton></Link>
+
+    <Link href="/users"><ListItemButton>
+      <ListItemIcon>
+        <PeopleIcon />
+      </ListItemIcon>
+      <ListItemText primary="Users" />
     </ListItemButton></Link>
 
   </React.Fragment>

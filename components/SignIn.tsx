@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useSnackbar } from 'notistack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import MiriconfAppBar from './TopBar';
+import MiriconfAppBar from './common/TopBar';
 
 const theme = createTheme();
 
