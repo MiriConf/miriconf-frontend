@@ -99,6 +99,7 @@ function DashboardContent() {
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <SystemsData></SystemsData>
+                  <Button variant="contained" sx={{ mt: 3, mb: 2 }} >Add System</Button>
                 </Paper>
               </Grid>
             </Grid>

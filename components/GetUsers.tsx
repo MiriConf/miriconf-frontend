@@ -9,10 +9,6 @@ import Title from './common/Title';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault();
-}
-
 // Read in cookie data 
 function getCookie() {
   const myCookie = Cookies.get("authKey")
