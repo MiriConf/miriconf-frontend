@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -16,9 +16,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems, secondaryListItems } from './common/Shelf';
 import AppBar from './common/AppBar';
 import Drawer from './common/Drawer';
-import Link from '@mui/material/Link';
-import UsersData from './GetUsers';
-import TeamsData from './GetTeams';
 import SystemsData from './GetSystems';
 
 const mdTheme = createTheme();
@@ -98,31 +95,11 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Teams */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <TeamsData></TeamsData>
-                  <Link color="primary" href="/teams" sx={{ mt: 3 }}>
-                    See more teams
-                  </Link>          
-                </Paper>
-              </Grid>
-              {/* Systems */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <SystemsData></SystemsData>
-                  <Link color="primary" href="/systems" sx={{ mt: 3 }}>
-                    See more systems
-                  </Link>          
-                </Paper>
-              </Grid>
               {/* Users */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <UsersData></UsersData>
-                  <Link color="primary" href="/users" sx={{ mt: 3 }}>
-                    See more users
-                  </Link>
+                  <SystemsData></SystemsData>
+                  <Button variant="contained" sx={{ mt: 3, mb: 2 }} >Add System</Button>
                 </Paper>
               </Grid>
             </Grid>
