@@ -17,13 +17,72 @@ import { mainListItems, secondaryListItems } from './common/Shelf';
 import AppBar from './common/AppBar';
 import Drawer from './common/Drawer';
 import TeamsData from './GetTeams';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  FormControl,
+  TextField
+} from '@mui/material';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useSnackbar } from 'notistack';
 
 const mdTheme = createTheme();
 
+// Read in cookie data 
+function getCookie() {
+  const myCookie = Cookies.get("authKey")
+  return myCookie
+}
+
 function DashboardContent() {
+  const { enqueueSnackbar } = useSnackbar();
+
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    department: '',
+    source_repo: '',
+    source_pat: ''
+  });
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const handleOpen = () => {
+    setDialogOpen(true);
+  };
+
+  const handleClose = () => {
+    setDialogOpen(false);
+  };
+
+  const cookie = getCookie();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:8081/api/v1/teams', formData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${cookie}`, // send the cookie as a Bearer token
+        },
+      });
+      console.log(response.data)
+      if (response.data.hasOwnProperty("error")) {
+        enqueueSnackbar('Invalid team, try again');
+      } else {
+        location.replace("/teams")
+      }  
+    } catch (error) {
+      console.error(error);
+    }
+
+    handleClose();
   };
 
   return (
@@ -99,9 +158,67 @@ function DashboardContent() {
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <TeamsData></TeamsData>
-                  <Button variant="contained" sx={{ mt: 3, mb: 2 }} >Add Team</Button>
+                  <Button onClick={handleOpen} variant="contained" sx={{ mt: 3, mb: 2 }} >Add Team</Button>
                 </Paper>
               </Grid>
+              <Dialog open={dialogOpen} onClose={handleClose}>
+                  <DialogTitle>Create Team</DialogTitle>
+                  <form onSubmit={handleSubmit}>
+                    <DialogContent>
+                      <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                          <FormControl>
+                            <TextField
+                              fullWidth
+                              sx={{ width: '200%' }}
+                              label="Team Name"
+                              value={formData.name}
+                              onChange={(event) => setFormData({ ...formData, name: event.target.value })}
+                            />
+                          </FormControl>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <FormControl>
+                            <TextField
+                              fullWidth
+                              sx={{ width: '200%' }}
+                              label="Team Department"
+                              value={formData.department}
+                              onChange={(event) => setFormData({ ...formData, department: event.target.value })}
+                            />
+                          </FormControl>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <FormControl>
+                            <TextField
+                              fullWidth
+                              sx={{ width: '200%' }}                              
+                              label="Github Repo"
+                              value={formData.source_repo}
+                              onChange={(event) => setFormData({ ...formData, source_repo: event.target.value })}
+                            />
+                          </FormControl>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <FormControl>
+                            <TextField
+                              fullWidth
+                              sx={{ width: '200%' }}                              
+                              label="Github PAT"
+                              type="password"
+                              value={formData.source_pat}
+                              onChange={(event) => setFormData({ ...formData, source_pat: event.target.value })}
+                            />
+                          </FormControl>
+                        </Grid>
+                      </Grid>  
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose}>Cancel</Button>
+                      <Button type="submit" variant="contained">Create</Button>
+                    </DialogActions>
+                  </form>
+              </Dialog>
             </Grid>
           </Container>
         </Box>
