@@ -39,6 +39,7 @@ function TeamsData() {
     };
   
     const [deleteOpen, setDeleteOpen] = React.useState(false);
+    const [publishOpen, setPublishOpen] = React.useState(false);
     const [selectedUsername, setSelectedUsername] = useState('');
     const [selectedId, setSelectedId] = useState('');
   
@@ -47,9 +48,19 @@ function TeamsData() {
       setSelectedUsername(username);
       setSelectedId(id);
     };
-  
+
+    const handlePublishClickOpen = (username: string, id: string) => {
+      setPublishOpen(true);
+      setSelectedUsername(username);
+      setSelectedId(id);
+    };
+
     const handleDeleteClose = () => {
       setDeleteOpen(false);
+    };
+
+    const handlePublishClose = () => {
+      setPublishOpen(false);
     };
 
     const cookie = getCookie();
@@ -110,6 +121,25 @@ function TeamsData() {
       }
     };
 
+    const handlePublishTeam = async (name: string, id: string) => {
+      try {
+        const response = await axios.get(`http://localhost:8081/api/v1/template/publish/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${cookie}`, // send the cookie as a Bearer token
+          },
+        });
+        console.log(response.data);
+        if (response.data.hasOwnProperty("error")) {
+          enqueueSnackbar('Invalid team, try again');
+        } else {
+          enqueueSnackbar(`Successful publish on ${name}`);
+        }  
+      } catch (error) {
+        console.error(error); 
+      }
+    };
+
   return (
     <React.Fragment>
       <Title>Teams</Title>
@@ -150,10 +180,10 @@ function TeamsData() {
                     <IconButton aria-label="build" onClick={() => handleBuild(item.name, item.ID)}>
                       <BuildIcon />
                     </IconButton>
-                    <IconButton aria-label="push" onClick={() => handleDeleteClickOpen(item.username, item.ID)}>
+                    <IconButton aria-label="push" onClick={() => handlePublishClickOpen(item.username, item.ID)}>
                       <UploadIcon />
                     </IconButton>
-                    <Dialog open={deleteOpen} onClose={handleDeleteClose} >
+                    <Dialog open={publishOpen} onClose={handlePublishClose} >
                       <DialogTitle>
                         Are you sure you want to publish your configuration?
                       </DialogTitle>
@@ -163,10 +193,10 @@ function TeamsData() {
                         </DialogContentText>
                       </DialogContent>
                       <DialogActions>
-                      <Button color="error" onClick={() => handleDeleteClickOpen(item.username, item.ID)}>Confirm</Button>
-                        <Button onClick={handleDeleteClose}>Cancel</Button>
+                      <Button color="error" onClick={() => handlePublishTeam(item.username, item.ID)}>Confirm</Button>
+                      <Button onClick={handlePublishClose}>Cancel</Button>
                       </DialogActions>
-                    </Dialog>
+                    </Dialog> 
                     <IconButton aria-label="delete" onClick={() => handleDeleteClickOpen(item.username, item.ID)}>
                       <DeleteIcon />
                     </IconButton>
