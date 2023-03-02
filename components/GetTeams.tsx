@@ -89,7 +89,7 @@ function TeamsData() {
 
     const handleDeleteTeam = async (name: string, id: string) => {
       try {
-        const response = await axios.delete(`http://localhost:8081/api/v1/teams/${id}`, {
+        const response = await axios.delete(`http://localhost:8081/api/v1/teams/${selectedId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${cookie}`, // send the cookie as a Bearer token
@@ -123,7 +123,7 @@ function TeamsData() {
 
     const handlePublishTeam = async (name: string, id: string) => {
       try {
-        const response = await axios.get(`http://localhost:8081/api/v1/template/publish/${id}`, {
+        const response = await axios.get(`http://localhost:8081/api/v1/template/publish/${selectedId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${cookie}`, // send the cookie as a Bearer token
@@ -133,7 +133,8 @@ function TeamsData() {
         if (response.data.hasOwnProperty("error")) {
           enqueueSnackbar('Invalid team, try again');
         } else {
-          enqueueSnackbar(`Successful publish on ${name}`);
+          enqueueSnackbar(`Successful publish`);
+          location.replace("/teams")
         }  
       } catch (error) {
         console.error(error); 
