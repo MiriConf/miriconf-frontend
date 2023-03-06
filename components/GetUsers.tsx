@@ -15,6 +15,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import Tooltip from '@mui/material/Tooltip';
 
 // Read in cookie data 
 function getCookie() {
@@ -108,9 +109,11 @@ return (
             <TableCell>{item.createdat}</TableCell>
             <TableCell>
               <ButtonGroup disableElevation variant="contained" color="primary" sx={{ marginLeft: 'auto' }}>
-                <IconButton aria-label="edit" onClick={handleEditClickOpen}>
-                  <EditIcon />
-                </IconButton>
+                <Tooltip title="Edit">
+                  <IconButton aria-label="edit" onClick={handleEditClickOpen}>
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
                 <Dialog open={editOpen} onClose={handleEditClose} >
                   <DialogTitle>
                     Feature not available yet.
@@ -124,9 +127,11 @@ return (
                     <Button onClick={handleEditClose}>Close</Button>
                   </DialogActions>
                 </Dialog>
-                <IconButton aria-label="delete" onClick={() => handleDeleteClickOpen(item.username, item.ID)}>
-                  <DeleteIcon />
-                </IconButton>
+                <Tooltip title="Delete">
+                  <IconButton aria-label="delete" onClick={() => handleDeleteClickOpen(item.username, item.ID)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
                 <Dialog open={deleteOpen} onClose={handleDeleteClose} >
                   <DialogTitle>
                     Are you sure?

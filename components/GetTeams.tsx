@@ -18,6 +18,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton, Button, ButtonGroup } from '@mui/material';
 import { useSnackbar } from 'notistack';
+import Tooltip from '@mui/material/Tooltip';
 
 // Read in cookie data 
 function getCookie() {
@@ -162,9 +163,11 @@ function TeamsData() {
                 <TableCell>{item.source_repo}</TableCell>
                 <TableCell>
                   <ButtonGroup disableElevation variant="contained" color="primary" sx={{ marginLeft: 'auto' }}>
-                    <IconButton aria-label="edit" onClick={handleEditClickOpen}>
-                      <EditIcon />
-                    </IconButton>
+                    <Tooltip title="Edit">
+                      <IconButton aria-label="edit" onClick={handleEditClickOpen}>
+                        <EditIcon />
+                      </IconButton>
+                    </Tooltip>
                     <Dialog open={editOpen} onClose={handleEditClose} >
                       <DialogTitle>
                         Feature not available yet.
@@ -178,12 +181,16 @@ function TeamsData() {
                         <Button onClick={handleEditClose}>Close</Button>
                       </DialogActions>
                     </Dialog>
-                    <IconButton aria-label="build" onClick={() => handleBuild(item.name, item.ID)}>
-                      <BuildIcon />
-                    </IconButton>
-                    <IconButton aria-label="push" onClick={() => handlePublishClickOpen(item.username, item.ID)}>
-                      <UploadIcon />
-                    </IconButton>
+                    <Tooltip title="Build">
+                      <IconButton aria-label="build" onClick={() => handleBuild(item.name, item.ID)}>
+                        <BuildIcon />
+                      </IconButton>
+                    </Tooltip>  
+                    <Tooltip title="Publish">
+                      <IconButton aria-label="push" onClick={() => handlePublishClickOpen(item.username, item.ID)}>
+                        <UploadIcon />
+                      </IconButton>
+                    </Tooltip>
                     <Dialog open={publishOpen} onClose={handlePublishClose} >
                       <DialogTitle>
                         Are you sure you want to publish your configuration?
@@ -198,9 +205,11 @@ function TeamsData() {
                       <Button onClick={handlePublishClose}>Cancel</Button>
                       </DialogActions>
                     </Dialog> 
-                    <IconButton aria-label="delete" onClick={() => handleDeleteClickOpen(item.username, item.ID)}>
-                      <DeleteIcon />
-                    </IconButton>
+                    <Tooltip title="Delete">
+                      <IconButton aria-label="delete" onClick={() => handleDeleteClickOpen(item.username, item.ID)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
                     <Dialog open={deleteOpen} onClose={handleDeleteClose} >
                       <DialogTitle>
                         Are you sure?
