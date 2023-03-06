@@ -28,6 +28,7 @@ import {
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useSnackbar } from 'notistack';
+import AppData from './SearchApps';
 
 const mdTheme = createTheme();
 
@@ -187,6 +188,9 @@ function DashboardContent() {
                               onChange={(event) => setFormData({ ...formData, department: event.target.value })}
                             />
                           </FormControl>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <AppData></AppData>
                         </Grid>
                         <Grid item xs={12}>
                           <FormControl>

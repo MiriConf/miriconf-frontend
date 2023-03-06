@@ -45,7 +45,7 @@ function AppData() {
           disablePortal
           id="Select Apps"
           options={data.map(item => item.name)}
-          sx={{ width: 600 }}
+          sx={{ width: '100%' }}
           renderInput={(params) => <TextField {...params} label="Apps" />}
         />
         </ThemeProvider>
