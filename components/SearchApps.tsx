@@ -27,9 +27,9 @@ function AppData() {
         const modifiedData = response.data.map(item => {
           return {
             name: item.name,
-            department: item.description,
-            createdat: item.version,
-            source_repo: item._id,
+            desc: item.description,
+            vers: item.version,
+            id: item._id,
           };
         });
         setData(modifiedData);
