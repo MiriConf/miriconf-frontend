@@ -49,9 +49,18 @@ function DashboardContent() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     department: '',
+    apps: '',
     source_repo: '',
     source_pat: ''
   });
+
+  const [selectedApps, setSelectedApps] = useState([]);
+
+  const handleSelectApps = (apps: any) => {
+    setSelectedApps(apps);
+    console.log(apps);
+  };
+
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleOpen = () => {
@@ -65,6 +74,10 @@ function DashboardContent() {
   const cookie = getCookie();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    setFormData({ ...formData, apps: selectedApps })
+
+    console.log(formData)
 
     try {
       const response = await axios.post('http://localhost:8081/api/v1/teams', formData, {
@@ -190,13 +203,15 @@ function DashboardContent() {
                           </FormControl>
                         </Grid>
                         <Grid item xs={12}>
-                          <AppData></AppData>
+
+      <AppData onSelectApps={handleSelectApps} />
+
                         </Grid>
                         <Grid item xs={12}>
                           <FormControl>
                             <TextField
                               fullWidth
-                              sx={{ width: '200%' }}                              
+                              sx={{ width: '200%' }}
                               label="Github Repo"
                               value={formData.source_repo}
                               onChange={(event) => setFormData({ ...formData, source_repo: event.target.value })}
@@ -207,7 +222,7 @@ function DashboardContent() {
                           <FormControl>
                             <TextField
                               fullWidth
-                              sx={{ width: '200%' }}                              
+                              sx={{ width: '200%' }}
                               label="Github PAT"
                               type="password"
                               value={formData.source_pat}

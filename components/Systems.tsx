@@ -24,7 +24,6 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import SystemsData from './GetSystems';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import Stack from '@mui/material/Stack';
 import {
   Dialog,
   DialogTitle,
@@ -145,6 +144,15 @@ useEffect(() => {
   });
 }, []);
 
+const handleSelectUsers = (event: any, selectedUsers: any) => {
+  const selectedUserIDs = selectedUsers.map(user => user.ID);
+  setFormData({ ...formData, users: selectedUserIDs })
+};
+
+const handleSelectTeams = (event: any, selectedTeams: any) => {
+  setFormData({ ...formData, team: selectedTeams.ID })
+};
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -239,35 +247,20 @@ useEffect(() => {
                         </Grid>
                         <Grid item xs={12}>
                           <Autocomplete
-                            multiple
+                            multiple                       
                             options={data}
-                            disableCloseOnSelect
-                            sx={{ width: 400 }}
                             getOptionLabel={(item) => item.username}
-                            renderOption={(props, item, { selected }) => (
-                              <li {...props}>
-                                <Checkbox
-                                  icon={icon}
-                                  checkedIcon={checkedIcon}
-                                  checked={selected}
-                                />
-                                {item.username}
-                              </li>
-                            )}
-                            renderInput={(params) => (
-                              <TextField {...params} label="Users" placeholder="Select Users..." />
-                            )}
-                            onChange={(event) => setFormData({ ...formData, users: event.target.value })}
-                          />
+                            sx={{ width: 400 }}
+                            onChange={handleSelectUsers}
+                            renderInput={(params) => <TextField {...params} label="Select Users..." />}
+                          />                        
                         </Grid>
                         <Grid item xs={12}>
                           <Autocomplete
                             options={teamData}
                             sx={{ width: 400 }}
                             getOptionLabel={(item) => item.name}
-                            onChange={(e, data) => {
-                              setInputValue(data.ID);
-                            }}
+                            onChange={handleSelectTeams}
                             renderInput={(params) => {
                               return (
                                 <TextField

@@ -4,6 +4,7 @@ import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Button } from '@mui/material';
 const mdTheme = createTheme();
 
 // Read in cookie data 
@@ -12,7 +13,7 @@ function getCookie() {
   return myCookie
 }
 
-function AppData() {
+function AppData(props: any) {
     
     const [data, setData] = useState([]);
     const cookie = getCookie();
@@ -38,15 +39,30 @@ function AppData() {
         console.log(error);
       });}, []);
 
+      const [formData, setFormData] = useState<FormData>({
+        name: '',
+        department: '',
+        apps: '',
+        source_repo: '',
+        source_pat: ''
+      });
+
+      const { onSelectApps } = props;
+
+      const handleSelectApps = (event: any, selectedApps: any) => {
+        onSelectApps(selectedApps);
+      };
+        
       return (
         <ThemeProvider theme={mdTheme}>
         <Autocomplete
         multiple
           disablePortal
-          id="Select Apps"
+          id="apps"
           options={data.map(item => item.name)}
           sx={{ width: '100%' }}
-          renderInput={(params) => <TextField {...params} label="Apps" />}
+          onChange={handleSelectApps}
+          renderInput={(params) => <TextField {...params} label="Apps to Install" />}
         />
         </ThemeProvider>
       );
