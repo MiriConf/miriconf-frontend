@@ -30,6 +30,7 @@ import {
   DialogContent,
   DialogActions,
   FormControl,
+  DialogContentText
 } from '@mui/material';
 import { useSnackbar } from 'notistack';
 
@@ -53,7 +54,7 @@ function getCookie() {
 function DashboardContent() {
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
+  function toggleDrawer() {
     setOpen(!open);
   };
 
@@ -77,6 +78,18 @@ function DashboardContent() {
     setDialogOpen(false);
   };
 
+  const [joinCodeOpen, setJoinCodeOpen] = React.useState(false);
+
+  function handleJoinOpen() {
+    setJoinCodeOpen(true);
+  };
+
+  function handleJoinClose() {
+    setJoinCodeOpen(false);
+  };
+
+  const [joinToken, setJoinToken] = React.useState("");
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -91,14 +104,18 @@ function DashboardContent() {
       if (response.data.hasOwnProperty("error")) {
         enqueueSnackbar('Invalid system, try again');
       } else {
-        location.replace("/systems")
+        setJoinToken(response.data)
+        handleJoinOpen()
       }  
     } catch (error) {
       console.error(error);
     }
-
     handleClose();
   };
+
+  function refresh() {
+    location.replace("/systems")
+  }
 
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -280,6 +297,36 @@ const handleSelectTeams = (event: any, selectedTeams: any) => {
                       <Button type="submit" variant="contained">Create</Button>
                     </DialogActions>
                   </form>
+                </Dialog>
+                <Dialog
+                  open={joinCodeOpen}
+                  onClose={handleJoinClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogTitle id="alert-dialog-title">
+                    Your Join Token
+                  </DialogTitle>
+                  <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                      This is the token you will use to join your system to the server, make sure you copy this down somewhere because you won't be able to generate a new one.
+                    </DialogContentText>
+                    <br></br>
+                    <TextField
+                      id="join-code"
+                      label="Agent Join Code:"
+                      defaultValue="token"
+                      sx={{ width: 400 }}
+                      value={joinToken}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                      variant="standard"
+                    />
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={refresh}>Close</Button>
+                  </DialogActions>
                 </Dialog>
             </Grid>
           </Container>
